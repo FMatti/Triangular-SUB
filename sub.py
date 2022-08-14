@@ -19,6 +19,6 @@ def sub(A: np.ndarray, b: np.ndarray, mode: str = 'lower') -> np.ndarray:
     x = np.zeros_like(b)
 
     for i in range(len(b)) if mode == 'lower' else reversed(range(len(b))):
-        x[i] = (b[i] - np.dot(A[i], x[:])) / A[i, i]
+        x[i] = (b[i] - np.dot(A[i, :], x[:])) / A[i, i]
 
     return x
