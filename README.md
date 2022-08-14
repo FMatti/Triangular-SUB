@@ -16,7 +16,7 @@ Commonly, the standard forward and backward substitution algorithms (for solving
 
 Let me write a lower triangular system in an explicit (pythonic) notation:
 
-$$ \begin{bmatrix} A[0,0] & & & & & \\\ A[1,0] & A[1,1] & & & & \\\ \vdots & \vdots & \ddots & & & \\\ A[i,0] & A[i,1] & \dots &  A[i,i] & & \\\ \vdots & \vdots & & & & \ddots \end{bmatrix} \begin{bmatrix} x[0] \\\ x[1] \\\ \vdots \\\ x[i] \\\ \vdots \end{bmatrix} = \begin{bmatrix} b[0] \\\ b[1] \\\ \vdots \\\ b[i] \\\ \vdots \end{bmatrix} $$
+$$ \begin{bmatrix} A[0,0] & & & & & \\\ A[1,0] & A[1,1] & & & & \\\ \vdots & \vdots & \ddots & & & \\\ A[i,0] & A[i,1] & \dots &  A[i,i] & & \\\ \vdots & \vdots & & \vdots & & \ddots \end{bmatrix} \begin{bmatrix} x[0] \\\ x[1] \\\ \vdots \\\ x[i] \\\ \vdots \end{bmatrix} = \begin{bmatrix} b[0] \\\ b[1] \\\ \vdots \\\ b[i] \\\ \vdots \end{bmatrix} $$
 
 Suppose $x[0], x[1], \dots, x[i-1]$ are already known. By explicit multiplication of the $i$-th row in $A$ with $x$, we see that
 
