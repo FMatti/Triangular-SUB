@@ -26,17 +26,15 @@ Introduce a helper vector
 
 $$ \chi^{(i)} = \begin{bmatrix} x[0] \\\ x[1] \\\ \vdots \\\ x[i-1] \\\ 0 \\\ \vdots \\\ 0 \end{bmatrix} $$
 
-whose components are identical to the ones of $x$, except that we set $\chi[i] = \chi[i+1] = \dots = \chi[n] = 0$.
+which allows us to rewrite the above equation in terms of a dot product (denoted by $\langle, \rangle$):
 
-This allows us to rewrite the above equation in terms of a dot product.
-
-$$ b[i] = \sum_{j=0}^{i} A[i,j] x[j] = \sum_{j=0}^{i-1} A[i,j] x[j] + A[i,i] x[i] = A[i,:] \cdot \chi^{(i)} + A[i,i] x[i] $$ 
+$$ b[i] = \sum_{j=0}^{i} A[i,j] x[j] = \sum_{j=0}^{i-1} A[i,j] x[j] + A[i,i] x[i] = \langle A[i,:], \chi^{(i)} \rangle + A[i,i] x[i] $$ 
 
 Here, I have employed the *numpy* indexing notation $A[i,:]$ to denote the $i$-th row of $A$.
 
 Some rearranging then yields
 
-$$ x[i] = (b[i] - A[i,:] \cdot \chi^{(i)}) / A[i,i] $$
+$$ x[i] = (b[i] - \langle A[i,:], \chi^{(i)} \rangle) / A[i,i] $$
 
 Hence, starting with $\chi^{(0)}$ (which by definition is just the zero vector), we can iteratively "fill" in this helper vector's components to finally obtain the solution $x$ to the system. But instead of explicitly working with a helper vector, we can just start with the vector $x$ directly by first setting all its components to zero and then iteratively filling in one component after the other according to the above equation.
 
@@ -48,12 +46,12 @@ An almost identical study can be conducted for the case of an upper triangular m
 
 Inputs: Lower triangular matrix $A$, vector $b$
 1. Let $x$ be the zero vector
-2. For $i = 0, 1, \dots, n-1$ let $x[i] = (b[i] - A[i,:] \cdot x) / A[i,i]$
+2. For $i = 0, 1, \dots, n-1$ let $x[i] = (b[i] - \langle A[i,:], x \rangle) / A[i,i]$
 
 ### Backward substitution
 
 Inputs: Lower triangular matrix $A$, vector $b$
 1. Let $x$ be the zero vector
-2. For $i = n-1, n-2, \dots, 0$ let $x[i] = (b[i] - A[i,:] \cdot x) / A[i,i]$
+2. For $i = n-1, n-2, \dots, 0$ let $x[i] = (b[i] - \langle A[i,:], x \rangle) / A[i,i]$
 
 One sees immediately that the two algorithms are basically the same, except that the order of the loop is inverted. This motivated me to combine the algorithms.
